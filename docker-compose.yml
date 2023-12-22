@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  minecraft-server:
+    container_name: 'minecraft-server'
+    image: 'minecraft-server'
+    # env_file:
+    #   - ./apps/presale-app/.env
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.mine
+    ports:
+      - 26666:26666
+    restart: always
+    # volumes:
+    #   - ./:/projects/minecraft/data
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 16G
+        reservations:
+          cpus: '4'
+          memory: 16G
+  minecraft-server-localx:
+    container_name: 'minecraft-server-localx'
+    image: localxpose/localxpose:latest
+    command: tunnel tcp --port 26666 --to minecraft-server:26666
+    env_file:
+      - .env
+    environment:
+      - ACCESS_TOKEN=$LOCALX_ACCESS_TOKEN

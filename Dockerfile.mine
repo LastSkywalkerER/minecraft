@@ -1,0 +1,18 @@
+FROM amd64/openjdk:17-jdk
+# FROM openjdk:17-oracle
+# LABEL backend_app="1.0.0"
+# WORKDIR /opt
+# COPY --chown=0:0 --from=build ./opt/time-off-management/build/libs/*.jar ./backend/
+COPY . ./minecraft-server
+ENV DISPLAY :0.0
+# EXPOSE 8081 7081
+RUN cd minecraft-server && java -jar forge-1.19.2-43.3.0-installer.jar --installServer
+
+# RUN apt-get update && apt-get install -y libxext6 libxtst6 libxrender1 libxi6 && rm -rf /var/lib/apt/lists/*
+
+# RUN yum -y install libX11-devel.x86_64
+# RUN yum -y install libXext.x86_64
+# RUN yum -y install libXrender.x86_64
+# RUN yum -y install libXtst.x86_64
+
+CMD cd minecraft-server && ./run.sh
