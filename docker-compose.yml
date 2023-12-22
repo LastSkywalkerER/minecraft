@@ -12,8 +12,10 @@ services:
     ports:
       - 26666:26666
     restart: always
-    # volumes:
-    #   - ./:/projects/minecraft/data
+    volumes:
+      - type: volume
+        source: minecraft-server
+        target: /minecraft-server
     deploy:
       resources:
         limits:
@@ -30,3 +32,7 @@ services:
       - .env
     environment:
       - ACCESS_TOKEN=$LOCALX_ACCESS_TOKEN
+
+volumes:
+  minecraft-server:
+    external: true

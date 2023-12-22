@@ -1,9 +1,9 @@
 FROM amd64/openjdk:17-jdk
 # FROM openjdk:17-oracle
 # LABEL backend_app="1.0.0"
-# WORKDIR /opt
+WORKDIR ./minecraft-server
 # COPY --chown=0:0 --from=build ./opt/time-off-management/build/libs/*.jar ./backend/
-COPY . ./minecraft-server
+COPY ./minecraft-server ./minecraft-server
 ENV DISPLAY :0.0
 # EXPOSE 8081 7081
 RUN cd minecraft-server && java -jar forge-1.19.2-43.3.0-installer.jar --installServer
