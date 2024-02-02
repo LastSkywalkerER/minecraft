@@ -4,12 +4,9 @@ services:
   minecraft-server:
     # user: 'root'
     container_name: 'minecraft-server'
-    image: 'minecraft-server'
+    image: 'lastskywalkerer/modpack-better-mc:1.0.0'
     # env_file:
     #   - ./apps/presale-app/.env
-    build:
-      context: ./
-      dockerfile: ./Dockerfile.mine
     ports:
       - 25565:25565
     restart: always

@@ -1,12 +1,18 @@
+# FROM ubuntu:22.04
 FROM amd64/openjdk:17-jdk
+# FROM amd64/eclipse-temurin:17-jre-focal-alpine
+# USER root
 # FROM openjdk:17-oracle
-# LABEL backend_app="1.0.0"
-WORKDIR ./minecraft-server
+# LABEL minecraft-server="1.0.0"
+# VOLUME ["/data"]
+WORKDIR ./data
 # COPY --chown=0:0 --from=build ./opt/time-off-management/build/libs/*.jar ./backend/
-COPY ./minecraft-server ./minecraft-server
-ENV DISPLAY :0.0
+COPY ./minecraft-server ./
+
+EXPOSE 25565
+# ENV DISPLAY :0.0
 # EXPOSE 8081 7081
-RUN cd minecraft-server && java -jar forge-1.19.2-43.3.0-installer.jar --installServer
+# RUN cd minecraft-server && java -jar forge-1.19.2-43.3.0-installer.jar --installServer
 
 # RUN apt-get update && apt-get install -y libxext6 libxtst6 libxrender1 libxi6 && rm -rf /var/lib/apt/lists/*
 
@@ -15,4 +21,4 @@ RUN cd minecraft-server && java -jar forge-1.19.2-43.3.0-installer.jar --install
 # RUN yum -y install libXrender.x86_64
 # RUN yum -y install libXtst.x86_64
 
-CMD cd minecraft-server && ./run.sh
+CMD bash ./run.sh
